@@ -3,6 +3,9 @@
 # Packages
 *.egg
 *.egg-info
+*.eggs
+*.cache
+lib/python2.7
 dist
 build
 eggs

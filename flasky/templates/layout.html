@@ -2,23 +2,28 @@
   <head>
     <title>Flasky</title>
     <link rel=stylesheet type=text/css href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <script src="https://unpkg.com/vue"></script>
     <script type="text/javascript" src="{{ url_for('static', filename='js/test.js')}}"></script>
   </head>
-  <div class=page>
-    <h1>Flasky</h1>
-    <div id="app">
-      {% raw %} {{ message }} {% endraw %}
+  <div class="container-fluid">
+    <div class="jumbotron">
+      <h1>Flasky</h1>
     </div>
-    <div class=metanav>
-    {% if not session.logged_in %}
-      <a href="{{ url_for('login') }}">log in</a>
-    {% else %}
-      <a href="{{ url_for('logout') }}">log out</a>
-    {% endif %}
+    <div class="container">
+      <div id="app">
+        {% raw %} {{ message }} {% endraw %}
+      </div>
+      <div class=metanav>
+      {% if not session.logged_in %}
+        <a href="{{ url_for('login') }}">log in</a>
+      {% else %}
+        <a href="{{ url_for('logout') }}">log out</a>
+      {% endif %}
+      </div>
+      {% for message in get_flashed_messages() %}
+        <div class=flash>{{ message }}</div>
+      {% endfor %}
+      {% block body %}{% endblock %}
     </div>
-    {% for message in get_flashed_messages() %}
-      <div class=flash>{{ message }}</div>
-    {% endfor %}
-    {% block body %}{% endblock %}
   </div>
