@@ -11,9 +11,6 @@
       <h1>Flasky</h1>
     </div>
     <div class="container">
-      <div id="app">
-        {% raw %} {{ message }} {% endraw %}
-      </div>
       <div class=metanav>
       {% if not session.logged_in %}
         <a href="{{ url_for('login') }}">log in</a>

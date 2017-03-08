@@ -1,0 +1,20 @@
+{% extends "layout.html" %}
+{% block body %}
+  {% raw %}
+    <div id="app">
+      {{ message }} <br />
+      <span v-bind:title="message2(10)">
+        Hover your mouse over me for a few seconds to see my dynamically bound title!
+      </span>
+      <p v-if="see">{{ value }}</p>
+      <li v-for="item of list">
+        {{ item }}
+      </li>
+      <p>{{ number }}</p>
+      <button v-on:click="addnum">Add One</button>
+      <input v-model="value">
+      <button v-on:click="seeit">Toggle Value</button>
+      <test-test></test-test>
+    </div>
+  {% endraw %}
+{% endblock %}

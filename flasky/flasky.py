@@ -57,6 +57,10 @@ def show_entries():
     entries = cur.fetchall()
     return render_template('show_entries.html', entries=entries)
 
+@app.route('/vuefun')
+def vue_page():
+    return render_template('vue_fun.html')
+
 @app.route('/add', methods=['POST'])
 def add_entry():
     if not session.get('logged_in'):
