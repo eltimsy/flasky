@@ -4,7 +4,11 @@ function stuff(number) {
 
 window.onload = function () {
   Vue.component('test-test', {
-    template: '<div>test test test</div>'
+    props: ['stuff'],
+    template: `<li class="list-group-item justify-content-between">
+                {{ stuff.item }}
+                <span class="badge badge-default badge-pill">{{ stuff.number }}</span>
+              </li>`
   });
 
   var app = new Vue({
@@ -14,7 +18,18 @@ window.onload = function () {
       message2: stuff,
       number: 5,
       see: false,
-      list: ["happy",2,3,4,5],
+      list: [
+        "happy",
+        "crazy man",
+        "more things to talk",
+        "I dunno",
+        "whateves",
+      ],
+      food: [
+        { item: 'lamb', number: 5},
+        { item: 'steak', number: 10},
+        { item: 'oyster', number: 100},
+      ],
       value: '',
     },
     methods: {

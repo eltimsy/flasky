@@ -7,14 +7,18 @@
         Hover your mouse over me for a few seconds to see my dynamically bound title!
       </span>
       <p v-if="see">{{ value }}</p>
-      <li v-for="item of list">
-        {{ item }}
-      </li>
+      <ul class="list-group">
+        <li v-for="item of list" class="list-group-item">
+          {{ item }}
+        </li>
+      </ul>
       <p>{{ number }}</p>
       <button v-on:click="addnum">Add One</button>
       <input v-model="value">
       <button v-on:click="seeit">Toggle Value</button>
-      <test-test></test-test>
+      <ul class="list-group">
+        <test-test v-for="item in food" v-bind:stuff="item"></test-test>
+      </ul>
     </div>
   {% endraw %}
 {% endblock %}
