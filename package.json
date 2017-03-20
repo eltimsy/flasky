@@ -1,0 +1,26 @@
+{
+  "name": "flasky",
+  "version": "1.0.0",
+  "description": "A test project to play with Flask and Vuejs.",
+  "main": "app.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/eltimsy/flasky.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/eltimsy/flasky/issues"
+  },
+  "homepage": "https://github.com/eltimsy/flasky#readme",
+  "dependencies": {
+    "vue": "^2.2.4",
+    "vue-router": "^2.3.0"
+  }
+}
