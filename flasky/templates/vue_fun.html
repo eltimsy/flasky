@@ -1,11 +1,7 @@
 {% extends "layout.html" %}
-{% block head %}
-  {{ super() }}
-  <script type="text/javascript" src="{{ url_for('static', filename='js/app.js')}}"></script>
-{% endblock %}
 {% block body %}
   {% raw %}
-    <div id="app">
+    <div>
       {{ message }} <br />
       <span v-bind:title="message2(10)">
         Hover your mouse over me for a few seconds to see my dynamically bound title!
@@ -28,11 +24,6 @@
       <ul class="list-group">
         <test-test v-for="item in food" v-bind:stuff="item" :key="item.id"></test-test>
       </ul>
-      <div>
-        <router-link to="/">home</router-link>
-        <router-link to="/vuefun">vuefun</router-link>
-      </div>
-      <router-view></router-view>
     </div>
   {% endraw %}
 {% endblock %}

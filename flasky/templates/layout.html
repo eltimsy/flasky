@@ -5,8 +5,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <script src="https://unpkg.com/vue"></script>
     <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
-    <script type="text/javascript" src="{{ url_for('static', filename='js/navigation.js')}}"></script>
-    <script type="text/javascript" src="{{ url_for('static', filename='js/vuerouter.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='./bundle.js')}}"></script>
     {% block head %}
     {% endblock %}
   </head>
@@ -14,34 +13,38 @@
     <div class="jumbotron">
       <h1>Flasky</h1>
     </div>
-    <div id="app2">
-      {% raw %}
-      <ul class="nav nav-pills">
-        <li v-for="item in urls"
-            role="presentation"
-            v-bind:class="{ active: isActive == item.text}"
-            v-on:click="activateItem(item.text)"
-        >
-            <a :href="item.link">{{ item.text }}</a></li>
-      </ul>
-      {% endraw %}
-    </div>
     <ul id="navbar" class="nav nav-pills">
-      <li role="presentation"><a href="{{ url_for('show_entries') }}">Home</a></li>
-      <li role="presentation"><a href="{{ url_for('vue_page') }}">Vue Fun</a></li>
-      <li role="presentation"><a href="/">Messages</a></li>
+        <li role="presentation"><a href="{{ url_for('show_entries') }}">Home</a></li>
+        <li role="presentation"><a href="{{ url_for('vue_page') }}">Vue Fun</a></li>
+        <li role="presentation"><a href="/">Messages</a></li>
     </ul>
-    <div class="container">
-      <div class=metanav>
-      {% if not session.logged_in %}
-        <a href="{{ url_for('login') }}">log in</a>
-      {% else %}
-        <a href="{{ url_for('logout') }}">log out</a>
-      {% endif %}
+    <div id="app">
+       <!--  {% raw %}
+        <ul class="nav nav-pills">
+          <li v-for="item in urls"
+              role="presentation"
+              v-bind:class="{ active: isActive == item.text}"
+              v-on:click="activateItem(item.text)"
+          >
+              <a :href="item.link">{{ item.text }}</a></li>
+        </ul>
+        {% endraw %} -->
+      <router-link to="/test">test</router-link>
+      <router-link to="/test2">test2</router-link>
+
+      <router-view></router-view>
+      <div class="container">
+        <div class=metanav>
+        {% if not session.logged_in %}
+          <a href="{{ url_for('login') }}">log in</a>
+        {% else %}
+          <a href="{{ url_for('logout') }}">log out</a>
+        {% endif %}
+        </div>
+        {% for message in get_flashed_messages() %}
+          <div class=flash>{{ message }}</div>
+        {% endfor %}
+        {% block body %}{% endblock %}
       </div>
-      {% for message in get_flashed_messages() %}
-        <div class=flash>{{ message }}</div>
-      {% endfor %}
-      {% block body %}{% endblock %}
     </div>
   </div>

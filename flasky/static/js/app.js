@@ -1,8 +1,23 @@
+import superfun from './test';
+
 function stuff(number) {
   return number * 10
 }
 
+const test = { template: '<test-component></test-component>'}
+const test2 = { template: '<p>asdflasdfjkalsdjf</p>'}
+
+const routes = [
+  { path: '/test', component: test },
+  { path: '/test2', component: test2 }
+]
+
 window.onload = function () {
+  superfun();
+  const router = new VueRouter({
+    routes
+  })
+
   Vue.component('test-test', {
     props: ['stuff'],
     template: `<li class="list-group-item justify-content-between">
@@ -12,6 +27,7 @@ window.onload = function () {
   });
 
   var app = new Vue({
+    router,
     el: '#app',
     data: {
       isActive: false,
