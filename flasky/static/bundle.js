@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 1);
+/******/ 	return __webpack_require__(__webpack_require__.s = 2);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -71,9 +71,16 @@
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (immutable) */ __webpack_exports__["a"] = superfun;
-function superfun() {
-    console.log('hello')
+/* harmony export (immutable) */ __webpack_exports__["a"] = homepage;
+function homepage() {
+  return({
+    a: 'hello',
+    page:`
+      <div>
+        <h2>awesome</h2>
+        <p>Alsdfkjalsdfjasldkfjasdlf alkdjflaskdjfl</p>
+      </div>`,
+  })
 }
 
 /***/ }),
@@ -81,16 +88,55 @@ function superfun() {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+/* harmony export (immutable) */ __webpack_exports__["a"] = vueFun;
+function vueFun() {
+  return({
+    page:`
+      <div>
+      {{ this.$parent.message }} <br />
+      <span v-bind:title="this.$parent.message2(10)">
+        Hover your mouse over me for a few seconds to see my dynamically bound title!
+      </span>
+      <p v-if="this.$parent.see">{{ this.$parent.value }}</p>
+      <ul class="list-group">
+        <li v-for="item of this.$parent.list"
+            :key="item"
+            class="list-group-item"
+            v-bind:class="{ active: isActive == item}"
+            v-on:click="this.$parent.activateItem(item)"
+        >
+          {{ item }}
+        </li>
+      </ul>
+      <p>{{ this.$parent.number }}</p>
+      <button v-on:click="this.$parent.addnum">Add One</button>
+      <input v-model="this.$parent.value">
+      <button v-on:click="this.$parent.seeit">Toggle Value</button>
+      <ul class="list-group">
+        <test-test v-for="item in this.$parent.food" v-bind:stuff="item" :key="item.id"></test-test>
+      </ul>
+    </div>`,
+  })
+}
+
+/***/ }),
+/* 2 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__test__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__home__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__vue_fun__ = __webpack_require__(1);
+
 
 
 function stuff(number) {
   return number * 10
 }
-
-const test = { template: '<test-component></test-component>'}
-const test2 = { template: '<p>asdflasdfjkalsdjf</p>'}
+const home = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__home__["a" /* default */])();
+const vuefun = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__vue_fun__["a" /* default */])();
+const test = { template: home.page}
+const test2 = { template: vuefun.page}
 
 const routes = [
   { path: '/test', component: test },
@@ -98,7 +144,6 @@ const routes = [
 ]
 
 window.onload = function () {
-  __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__test__["a" /* default */])();
   const router = new VueRouter({
     routes
   })
@@ -134,7 +179,7 @@ window.onload = function () {
         { item: 'steak', number: 10},
         { item: 'oyster', number: 100},
       ],
-      value: '',
+      value: '123123',
     },
     methods: {
       addnum: function () {

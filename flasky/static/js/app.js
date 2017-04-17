@@ -1,11 +1,13 @@
-import superfun from './test';
+import homepage from './home';
+import vueFun from './vue_fun';
 
 function stuff(number) {
   return number * 10
 }
-
-const test = { template: '<test-component></test-component>'}
-const test2 = { template: '<p>asdflasdfjkalsdjf</p>'}
+const home = homepage();
+const vuefun = vueFun();
+const test = { template: home.page}
+const test2 = { template: vuefun.page}
 
 const routes = [
   { path: '/test', component: test },
@@ -13,7 +15,6 @@ const routes = [
 ]
 
 window.onload = function () {
-  superfun();
   const router = new VueRouter({
     routes
   })
@@ -49,7 +50,7 @@ window.onload = function () {
         { item: 'steak', number: 10},
         { item: 'oyster', number: 100},
       ],
-      value: '',
+      value: '123123',
     },
     methods: {
       addnum: function () {
