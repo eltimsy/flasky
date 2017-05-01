@@ -7,11 +7,11 @@ function stuff(number) {
 const home = homepage();
 const vuefun = vueFun();
 const test = { template: home.page}
-const test2 = { template: vuefun.page}
+const test2 = { template: vuefun.template}
 
 const routes = [
   { path: '/test', component: test },
-  { path: '/test2', component: test2 }
+  { path: '/test2', component: vuefun }
 ]
 
 window.onload = function () {

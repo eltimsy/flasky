@@ -1,6 +1,6 @@
 export default function vueFun() {
-  return({
-    page:`
+  return Vue.component('test2',{
+    template:`
       <div>
       {{ this.$parent.message }} <br />
       <span v-bind:title="this.$parent.message2(10)">
@@ -12,7 +12,7 @@ export default function vueFun() {
             :key="item"
             class="list-group-item"
             v-bind:class="{ active: isActive == item}"
-            v-on:click="this.$parent.activateItem(item)"
+            v-on:click="activateItem(item)"
         >
           {{ item }}
         </li>
@@ -25,5 +25,15 @@ export default function vueFun() {
         <test-test v-for="item in this.$parent.food" v-bind:stuff="item" :key="item.id"></test-test>
       </ul>
     </div>`,
+    data: function (){
+      return {
+        isActive: false,
+      }
+    },
+    methods: {
+      activateItem: function(item) {
+        this.isActive = item;
+      },
+    }
   })
 }

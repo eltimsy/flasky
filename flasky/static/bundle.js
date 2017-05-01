@@ -90,8 +90,8 @@ function homepage() {
 "use strict";
 /* harmony export (immutable) */ __webpack_exports__["a"] = vueFun;
 function vueFun() {
-  return({
-    page:`
+  return Vue.component('test2',{
+    template:`
       <div>
       {{ this.$parent.message }} <br />
       <span v-bind:title="this.$parent.message2(10)">
@@ -103,7 +103,7 @@ function vueFun() {
             :key="item"
             class="list-group-item"
             v-bind:class="{ active: isActive == item}"
-            v-on:click="this.$parent.activateItem(item)"
+            v-on:click="activateItem(item)"
         >
           {{ item }}
         </li>
@@ -116,6 +116,16 @@ function vueFun() {
         <test-test v-for="item in this.$parent.food" v-bind:stuff="item" :key="item.id"></test-test>
       </ul>
     </div>`,
+    data: function (){
+      return {
+        isActive: false,
+      }
+    },
+    methods: {
+      activateItem: function(item) {
+        this.isActive = item;
+      },
+    }
   })
 }
 
@@ -136,11 +146,11 @@ function stuff(number) {
 const home = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__home__["a" /* default */])();
 const vuefun = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__vue_fun__["a" /* default */])();
 const test = { template: home.page}
-const test2 = { template: vuefun.page}
+const test2 = { template: vuefun.template}
 
 const routes = [
   { path: '/test', component: test },
-  { path: '/test2', component: test2 }
+  { path: '/test2', component: vuefun }
 ]
 
 window.onload = function () {
