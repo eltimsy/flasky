@@ -1,7 +1,6 @@
 export default function homepage() {
-  return({
-    a: 'hello',
-    page:`
+  return Vue.component('home',{
+    template:`
       <div>
         <h2>awesome</h2>
         <p>Alsdfkjalsdfjasldkfjasdlf alkdjflaskdjfl</p>

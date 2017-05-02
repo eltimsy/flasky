@@ -2,6 +2,7 @@ import os
 import sqlite3
 from flask import Flask, request, session, g, redirect, url_for, abort, \
      render_template, flash
+from .serializer import EntriesSchema
 
 app = Flask(__name__) # create the application instance :)
 app.config.from_object(__name__) # load config from this file , flaskr.py
@@ -51,11 +52,19 @@ def close_db(error):
         g.sqlite_db.close()
 
 @app.route('/')
+def home():
+    return render_template('layout.html')
+
+@app.route('/showentries', methods=['GET'])
 def show_entries():
     db = get_db()
     cur = db.execute('select title, text from entries order by id desc')
     entries = cur.fetchall()
-    return render_template('show_entries.html', entries=entries)
+    schema = EntriesSchema()
+    result = [schema.dump(item) for item in entries]
+    import pdb;pdb.set_trace()
+    return result.data
+    # return render_template('show_entries.html', entries=entries)
 
 @app.route('/vuefun')
 def vue_page():

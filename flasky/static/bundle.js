@@ -73,9 +73,8 @@
 "use strict";
 /* harmony export (immutable) */ __webpack_exports__["a"] = homepage;
 function homepage() {
-  return({
-    a: 'hello',
-    page:`
+  return Vue.component('home',{
+    template:`
       <div>
         <h2>awesome</h2>
         <p>Alsdfkjalsdfjasldkfjasdlf alkdjflaskdjfl</p>
@@ -90,7 +89,7 @@ function homepage() {
 "use strict";
 /* harmony export (immutable) */ __webpack_exports__["a"] = vueFun;
 function vueFun() {
-  return Vue.component('test2',{
+  return Vue.component('vuefun',{
     template:`
       <div>
       {{ this.$parent.message }} <br />
@@ -135,22 +134,20 @@ function vueFun() {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__home__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__vue_fun__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_home__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_vue_fun__ = __webpack_require__(1);
 
 
 
 function stuff(number) {
   return number * 10
 }
-const home = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__home__["a" /* default */])();
-const vuefun = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__vue_fun__["a" /* default */])();
-const test = { template: home.page}
-const test2 = { template: vuefun.template}
+const home = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__components_home__["a" /* default */])();
+const vuefun = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__components_vue_fun__["a" /* default */])();
 
 const routes = [
-  { path: '/test', component: test },
-  { path: '/test2', component: vuefun }
+  { path: '/', component: home },
+  { path: '/vuefun', component: vuefun }
 ]
 
 window.onload = function () {

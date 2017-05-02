@@ -13,27 +13,20 @@
     <div class="jumbotron">
       <h1>Flasky</h1>
     </div>
-    <ul id="navbar" class="nav nav-pills">
+<!--     <ul id="navbar" class="nav nav-pills">
         <li role="presentation"><a href="{{ url_for('show_entries') }}">Home</a></li>
         <li role="presentation"><a href="{{ url_for('vue_page') }}">Vue Fun</a></li>
         <li role="presentation"><a href="/">Messages</a></li>
-    </ul>
+    </ul> -->
     <div id="app">
-       <!--  {% raw %}
-        <ul class="nav nav-pills">
-          <li v-for="item in urls"
-              role="presentation"
-              v-bind:class="{ active: isActive == item.text}"
-              v-on:click="activateItem(item.text)"
-          >
-              <a :href="item.link">{{ item.text }}</a></li>
-        </ul>
-        {% endraw %} -->
-      <router-link to="/test">test</router-link>
-      <router-link to="/test2">test2</router-link>
+
+    <ul id="navbar" class="nav nav-pills">
+      <li role='presentation'><router-link to="/">Home</router-link></li>
+      <li role='presentation'><router-link to="/vuefun">Vue Fun</router-link></li>
+    </ul>
 
       <router-view></router-view>
-      <div class="container">
+      <!-- <div class="container">
         <div class=metanav>
         {% if not session.logged_in %}
           <a href="{{ url_for('login') }}">log in</a>
@@ -45,6 +38,6 @@
           <div class=flash>{{ message }}</div>
         {% endfor %}
         {% block body %}{% endblock %}
-      </div>
+      </div> -->
     </div>
   </div>

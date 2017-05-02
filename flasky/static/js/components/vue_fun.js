@@ -1,5 +1,5 @@
 export default function vueFun() {
-  return Vue.component('test2',{
+  return Vue.component('vuefun',{
     template:`
       <div>
       {{ this.$parent.message }} <br />
