@@ -1,15 +1,18 @@
 import homepage from './components/home';
 import vueFun from './components/vue_fun';
+import addEntry from './components/addentry';
 
 function stuff(number) {
   return number * 10
 }
 const home = homepage();
 const vuefun = vueFun();
+const addentry = addEntry();
 
 const routes = [
   { path: '/', component: home },
-  { path: '/vuefun', component: vuefun }
+  { path: '/vuefun', component: vuefun },
+  { path: '/addentry', component: addentry }
 ]
 
 window.onload = function () {

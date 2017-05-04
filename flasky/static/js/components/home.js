@@ -6,15 +6,17 @@ export default function homepage() {
       <div>
         <h2>awesome</h2>
         <p>Alsdfkjalsdfjasldkfjasdlf alkdjflaskdjfl</p>
-        <ul class="list-group">
-          <li v-for="item of entries"
-              :key="item.title"
-              class="list-group-item"
-          >
-            <h3>{{ item.title }}</h3><hr>
-            <p>{{ item.text }}</p>
-          </li>
-        </ul>
+        <div v-for="item of entries"
+            :key="item.title"
+            class="panel panel-info"
+        >
+          <div class="panel-heading">
+            <h3 class="panel-title">{{ item.title }}</h3>
+          </div>
+          <div class="panel-body">
+            {{ item.text }}
+          </div>
+        </div>
       </div>`,
     data: function(){
       return {

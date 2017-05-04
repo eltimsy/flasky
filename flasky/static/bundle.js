@@ -63,180 +63,11 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 2);
+/******/ 	return __webpack_require__(__webpack_require__.s = 4);
 /******/ })
 /************************************************************************/
 /******/ ([
 /* 0 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (immutable) */ __webpack_exports__["a"] = homepage;
-const $ = __webpack_require__ (3);
-
-function homepage() {
-  return Vue.component('home',{
-    template:`
-      <div>
-        <h2>awesome</h2>
-        <p>Alsdfkjalsdfjasldkfjasdlf alkdjflaskdjfl</p>
-        <ul class="list-group">
-          <li v-for="item of entries"
-              :key="item.title"
-              class="list-group-item"
-          >
-            <h3>{{ item.title }}</h3><hr>
-            <p>{{ item.text }}</p>
-          </li>
-        </ul>
-      </div>`,
-    data: function(){
-      return {
-          entries: null,
-      }
-    },
-    methods: {
-      fetchData: function() {
-        $.ajax({
-          url: 'http://127.0.0.1:5000/showentries'
-        }).done(data => {
-          this.entries = JSON.parse(data);
-        })
-      }
-    },
-    mounted: function() {
-      this.fetchData()
-    }
-  })
-}
-
-/***/ }),
-/* 1 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (immutable) */ __webpack_exports__["a"] = vueFun;
-function vueFun() {
-  return Vue.component('vuefun',{
-    template:`
-      <div>
-      {{ this.$parent.message }} <br />
-      <span v-bind:title="this.$parent.message2(10)">
-        Hover your mouse over me for a few seconds to see my dynamically bound title!
-      </span>
-      <p v-if="this.$parent.see">{{ this.$parent.value }}</p>
-      <ul class="list-group">
-        <li v-for="item of this.$parent.list"
-            :key="item"
-            class="list-group-item"
-            v-bind:class="{ active: isActive == item}"
-            v-on:click="activateItem(item)"
-        >
-          {{ item }}
-        </li>
-      </ul>
-      <p>{{ this.$parent.number }}</p>
-      <button v-on:click="this.$parent.addnum">Add One</button>
-      <input v-model="this.$parent.value">
-      <button v-on:click="this.$parent.seeit">Toggle Value</button>
-      <ul class="list-group">
-        <test-test v-for="item in this.$parent.food" v-bind:stuff="item" :key="item.id"></test-test>
-      </ul>
-    </div>`,
-    data: function (){
-      return {
-        isActive: false,
-      }
-    },
-    methods: {
-      activateItem: function(item) {
-        this.isActive = item;
-      },
-    }
-  })
-}
-
-/***/ }),
-/* 2 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_home__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_vue_fun__ = __webpack_require__(1);
-
-
-
-function stuff(number) {
-  return number * 10
-}
-const home = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__components_home__["a" /* default */])();
-const vuefun = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__components_vue_fun__["a" /* default */])();
-
-const routes = [
-  { path: '/', component: home },
-  { path: '/vuefun', component: vuefun }
-]
-
-window.onload = function () {
-  const router = new VueRouter({
-    routes
-  })
-
-  Vue.component('test-test', {
-    props: ['stuff'],
-    template: `<li class="list-group-item justify-content-between">
-                {{ stuff.item }}
-                <span class="badge badge-default badge-pill">{{ stuff.number }}</span>
-              </li>`
-  });
-
-  var app = new Vue({
-    router,
-    el: '#app',
-    data: {
-      isActive: false,
-      homeActive: false,
-      vueActive: true,
-      message: 'Hello Vue!',
-      message2: stuff,
-      number: 5,
-      see: false,
-      list: [
-        "happy",
-        "crazy man",
-        "more things to talk",
-        "I dunno",
-        "whateves",
-      ],
-      food: [
-        { item: 'lamb', number: 5},
-        { item: 'steak', number: 10},
-        { item: 'oyster', number: 100},
-      ],
-      value: '123123',
-    },
-    methods: {
-      addnum: function () {
-        this.number += 1
-      },
-      seeit: function () {
-        if(this.see) {
-          this.see = false
-        } else {
-          this.see = true
-        }
-      },
-      activateItem: function(item) {
-        this.isActive = item;
-      },
-    }
-  });
-}
-
-
-/***/ }),
-/* 3 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -10493,6 +10324,222 @@ if ( !noGlobal ) {
 
 return jQuery;
 } );
+
+
+/***/ }),
+/* 1 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (immutable) */ __webpack_exports__["a"] = addEntry;
+const $ = __webpack_require__ (0);
+
+function addEntry() {
+  return Vue.component('addentry',{
+    template:`
+      <div>
+        <h2>Add Entry</h2>
+        <p>Write something awesome</p>
+        <form method=post class=add-entry>
+          <dl>
+            <dt>Title:
+            <dd><input type=text size=30 name=title>
+            <dt>Text:
+            <dd><textarea name=text rows=5 cols=40></textarea>
+            <dd><input type=submit value=Share>
+          </dl>
+        </form>
+      </div>`,
+    data: function(){
+      return {
+          entries: null,
+      }
+    },
+    methods: {
+      addsomething: function() {
+        $.ajax({
+          url: 'http://127.0.0.1:5000/showentries'
+        }).done(data => {
+          this.entries = JSON.parse(data);
+        })
+      }
+    },
+  })
+}
+
+/***/ }),
+/* 2 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (immutable) */ __webpack_exports__["a"] = homepage;
+const $ = __webpack_require__ (0);
+
+function homepage() {
+  return Vue.component('home',{
+    template:`
+      <div>
+        <h2>awesome</h2>
+        <p>Alsdfkjalsdfjasldkfjasdlf alkdjflaskdjfl</p>
+        <div v-for="item of entries"
+            :key="item.title"
+            class="panel panel-info"
+        >
+          <div class="panel-heading">
+            <h3 class="panel-title">{{ item.title }}</h3>
+          </div>
+          <div class="panel-body">
+            {{ item.text }}
+          </div>
+        </div>
+      </div>`,
+    data: function(){
+      return {
+          entries: null,
+      }
+    },
+    methods: {
+      fetchData: function() {
+        $.ajax({
+          url: 'http://127.0.0.1:5000/showentries'
+        }).done(data => {
+          this.entries = JSON.parse(data);
+        })
+      }
+    },
+    mounted: function() {
+      this.fetchData()
+    }
+  })
+}
+
+/***/ }),
+/* 3 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (immutable) */ __webpack_exports__["a"] = vueFun;
+function vueFun() {
+  return Vue.component('vuefun',{
+    template:`
+      <div>
+      {{ this.$parent.message }} <br />
+      <span v-bind:title="this.$parent.message2(10)">
+        Hover your mouse over me for a few seconds to see my dynamically bound title!
+      </span>
+      <p v-if="this.$parent.see">{{ this.$parent.value }}</p>
+      <ul class="list-group">
+        <li v-for="item of this.$parent.list"
+            :key="item"
+            class="list-group-item"
+            v-bind:class="{ active: isActive == item}"
+            v-on:click="activateItem(item)"
+        >
+          {{ item }}
+        </li>
+      </ul>
+      <p>{{ this.$parent.number }}</p>
+      <button v-on:click="this.$parent.addnum">Add One</button>
+      <input v-model="this.$parent.value">
+      <button v-on:click="this.$parent.seeit">Toggle Value</button>
+      <ul class="list-group">
+        <test-test v-for="item in this.$parent.food" v-bind:stuff="item" :key="item.id"></test-test>
+      </ul>
+    </div>`,
+    data: function (){
+      return {
+        isActive: false,
+      }
+    },
+    methods: {
+      activateItem: function(item) {
+        this.isActive = item;
+      },
+    }
+  })
+}
+
+/***/ }),
+/* 4 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_home__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_vue_fun__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_addentry__ = __webpack_require__(1);
+
+
+
+
+function stuff(number) {
+  return number * 10
+}
+const home = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__components_home__["a" /* default */])();
+const vuefun = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__components_vue_fun__["a" /* default */])();
+const addentry = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2__components_addentry__["a" /* default */])();
+
+const routes = [
+  { path: '/', component: home },
+  { path: '/vuefun', component: vuefun },
+  { path: '/addentry', component: addentry }
+]
+
+window.onload = function () {
+  const router = new VueRouter({
+    routes
+  })
+
+  Vue.component('test-test', {
+    props: ['stuff'],
+    template: `<li class="list-group-item justify-content-between">
+                {{ stuff.item }}
+                <span class="badge badge-default badge-pill">{{ stuff.number }}</span>
+              </li>`
+  });
+
+  var app = new Vue({
+    router,
+    el: '#app',
+    data: {
+      isActive: false,
+      homeActive: false,
+      vueActive: true,
+      message: 'Hello Vue!',
+      message2: stuff,
+      number: 5,
+      see: false,
+      list: [
+        "happy",
+        "crazy man",
+        "more things to talk",
+        "I dunno",
+        "whateves",
+      ],
+      food: [
+        { item: 'lamb', number: 5},
+        { item: 'steak', number: 10},
+        { item: 'oyster', number: 100},
+      ],
+      value: '123123',
+    },
+    methods: {
+      addnum: function () {
+        this.number += 1
+      },
+      seeit: function () {
+        if(this.see) {
+          this.see = false
+        } else {
+          this.see = true
+        }
+      },
+      activateItem: function(item) {
+        this.isActive = item;
+      },
+    }
+  });
+}
 
 
 /***/ })
