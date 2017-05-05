@@ -4,8 +4,8 @@ export default function homepage() {
   return Vue.component('home',{
     template:`
       <div>
-        <h2>awesome</h2>
-        <p>Alsdfkjalsdfjasldkfjasdlf alkdjflaskdjfl</p>
+        <h2>ALl your POSTS!</h2>
+        <p>Read them dumb posts!</p>
         <div v-for="item of entries"
             :key="item.title"
             class="panel panel-info"

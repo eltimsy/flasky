@@ -10340,27 +10340,29 @@ function addEntry() {
       <div>
         <h2>Add Entry</h2>
         <p>Write something awesome</p>
-        <form method=post class=add-entry>
-          <dl>
-            <dt>Title:
-            <dd><input type=text size=30 name=title>
-            <dt>Text:
-            <dd><textarea name=text rows=5 cols=40></textarea>
-            <dd><input type=submit value=Share>
-          </dl>
+        <div class="alert alert-success" v-if="success">Success you have posted something....!</div>
+        <form method=post class=add-entry v-on:submit.prevent="addsomething">
+          <h3>Title:</h3>
+          <input type=text size=30 name=title v-model="title">
+          <h3>Text:</h3>
+          <textarea name=text rows=5 cols=40 v-model="text"></textarea><br>
+          <input type=submit value=Share>
         </form>
       </div>`,
     data: function(){
       return {
-          entries: null,
+          title: '',
+          text: '',
+          success: false,
       }
     },
     methods: {
       addsomething: function() {
-        $.ajax({
-          url: 'http://127.0.0.1:5000/showentries'
+        this.success = false
+        $.post('http://127.0.0.1:5000/add',{
+          'title': this.title, 'text': this.text
         }).done(data => {
-          this.entries = JSON.parse(data);
+          this.success = true
         })
       }
     },
@@ -10379,8 +10381,8 @@ function homepage() {
   return Vue.component('home',{
     template:`
       <div>
-        <h2>awesome</h2>
-        <p>Alsdfkjalsdfjasldkfjasdlf alkdjflaskdjfl</p>
+        <h2>ALl your POSTS!</h2>
+        <p>Read them dumb posts!</p>
         <div v-for="item of entries"
             :key="item.title"
             class="panel panel-info"
