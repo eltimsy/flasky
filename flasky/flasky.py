@@ -84,6 +84,14 @@ def add_entry():
     flash('New entry was successfully posted')
     return redirect(url_for('show_entries'))
 
+@app.route('/delete', methods=['DELETE'])
+def delete_entry():
+    db = get_db()
+    db.execute('delete from entries where text=(?)', [request.form['entry']])
+    db.commit()
+    flash('Entry was deleted')
+    return ('success')
+
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     error = None
