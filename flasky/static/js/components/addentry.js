@@ -17,9 +17,9 @@ export default function addEntry() {
       </div>`,
     data: function(){
       return {
-          title: '',
-          text: '',
-          success: false,
+        title: '',
+        text: '',
+        success: false,
       }
     },
     methods: {

@@ -10351,9 +10351,9 @@ function addEntry() {
       </div>`,
     data: function(){
       return {
-          title: '',
-          text: '',
-          success: false,
+        title: '',
+        text: '',
+        success: false,
       }
     },
     methods: {
@@ -10392,13 +10392,21 @@ function homepage() {
           </div>
           <div class="panel-body">
             {{ item.text }}
-            <hr><button type="button" class="btn btn-danger" v-on:click="deletepost(item.text)">Delete</button>
+            <hr>
+            <button type="button" class="btn btn-danger" v-on:click="deletepost(item.text)">Delete</button>
+            <button type="button" class="btn btn-danger" v-on:click="editpost(item.text)">Edit</button>
+            <form v-if="isActive === item.text" method=put class=edit-entry v-on:submit.prevent="editsomething(item.text)">
+              <br><textarea name=text rows=3 cols=40 v-model="text"></textarea><br>
+              <input type=submit value=Edit>
+            </form>
           </div>
         </div>
       </div>`,
     data: function(){
       return {
-          entries: null,
+        entries: null,
+        isActive: false,
+        text: '',
       }
     },
     methods: {
@@ -10415,11 +10423,23 @@ function homepage() {
           type: 'DELETE',
           data: {entry: text},
           success: function(data) {
-            console.log(data)
             window.location.reload();
           }
         })
-      }
+      },
+      editpost: function(text) {
+        this.isActive = text;
+      },
+      editsomething: function(text) {
+        $.ajax({
+          url:'http://127.0.0.1:5000/edit',
+          type: 'PUT',
+          data: {entry: text, change: this.text},
+          success: function(data) {
+            window.location.reload();
+          }
+        })
+      },
     },
     mounted: function() {
       this.fetchData()

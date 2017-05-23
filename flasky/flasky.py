@@ -92,6 +92,14 @@ def delete_entry():
     flash('Entry was deleted')
     return ('success')
 
+@app.route('/edit', methods=['PUT'])
+def edit_entry():
+    db = get_db()
+    db.execute('update entries set text=(?) where text=(?)', [request.form['change'], request.form['entry']])
+    db.commit()
+    flash('Entry was updated')
+    return ('success')
+
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     error = None
