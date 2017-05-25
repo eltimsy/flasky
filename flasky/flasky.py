@@ -2,6 +2,11 @@ import os
 import sqlite3
 from flask import Flask, request, session, g, redirect, url_for, abort, \
      render_template, flash, json
+from .secrets import (
+    USER,
+    PASS,
+    GOOGLE_MAPS_KEY,
+)
 
 app = Flask(__name__) # create the application instance :)
 app.config.from_object(__name__) # load config from this file , flaskr.py
@@ -10,8 +15,8 @@ app.config.from_object(__name__) # load config from this file , flaskr.py
 app.config.update(dict(
     DATABASE=os.path.join(app.root_path, 'flasky.db'),
     SECRET_KEY='development key',
-    USERNAME='hello',
-    PASSWORD='123'
+    USERNAME=USER,
+    PASSWORD=PASS,
 ))
 app.config.from_envvar('FLASKY_SETTINGS', silent=True)
 
