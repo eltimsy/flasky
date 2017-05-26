@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 4);
+/******/ 	return __webpack_require__(__webpack_require__.s = 5);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -10452,6 +10452,39 @@ function homepage() {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+/* WEBPACK VAR INJECTION */(function($) {/* harmony export (immutable) */ __webpack_exports__["a"] = googlemap;
+function googlemap() {
+  return Vue.component('mapfun',{
+    template:`
+      <div id="Gmap">
+        <button type="button" class="btn btn-danger" v-on:click="showmap">Show Map</button>
+        <img :src="map" />
+      </div>`,
+    data: function (){
+      return {
+        map: null,
+      }
+    },
+    methods: {
+      showmap: function() {
+        $.ajax({
+          url: 'http://127.0.0.1:5000/map'
+        }).done(data => {
+          var abc = JSON.parse(data)
+          console.log(abc.map)
+          this.map = (abc.map);
+        })
+      }
+    }
+  })
+}
+/* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(0)))
+
+/***/ }),
+/* 4 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
 /* harmony export (immutable) */ __webpack_exports__["a"] = vueFun;
 function vueFun() {
   return Vue.component('vuefun',{
@@ -10494,14 +10527,16 @@ function vueFun() {
 }
 
 /***/ }),
-/* 4 */
+/* 5 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_home__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_vue_fun__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_vue_fun__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_addentry__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_map__ = __webpack_require__(3);
+
 
 
 
@@ -10512,11 +10547,13 @@ function stuff(number) {
 const home = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__components_home__["a" /* default */])();
 const vuefun = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__components_vue_fun__["a" /* default */])();
 const addentry = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2__components_addentry__["a" /* default */])();
+const map = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_3__components_map__["a" /* default */])();
 
 const routes = [
   { path: '/', component: home },
   { path: '/vuefun', component: vuefun },
-  { path: '/addentry', component: addentry }
+  { path: '/addentry', component: addentry },
+  { path: '/mapfun', component: map}
 ]
 
 window.onload = function () {
@@ -10532,7 +10569,7 @@ window.onload = function () {
               </li>`
   });
 
-  var app = new Vue({
+  var App = window.App = new Vue({
     router,
     el: '#app',
     data: {

@@ -1,6 +1,7 @@
 import homepage from './components/home';
 import vueFun from './components/vue_fun';
 import addEntry from './components/addentry';
+import googlemap from './components/map';
 
 function stuff(number) {
   return number * 10
@@ -8,11 +9,13 @@ function stuff(number) {
 const home = homepage();
 const vuefun = vueFun();
 const addentry = addEntry();
+const map = googlemap();
 
 const routes = [
   { path: '/', component: home },
   { path: '/vuefun', component: vuefun },
-  { path: '/addentry', component: addentry }
+  { path: '/addentry', component: addentry },
+  { path: '/mapfun', component: map}
 ]
 
 window.onload = function () {
@@ -28,7 +31,7 @@ window.onload = function () {
               </li>`
   });
 
-  var app = new Vue({
+  var App = window.App = new Vue({
     router,
     el: '#app',
     data: {
