@@ -12,6 +12,7 @@ export default function googlemap() {
     },
     methods: {
       showmap: function() {
+        this.$parent.mapActive = true;
         $.ajax({
           url: 'http://127.0.0.1:5000/map'
         }).done(data => {

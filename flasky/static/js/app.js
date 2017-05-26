@@ -37,6 +37,7 @@ window.onload = function () {
     data: {
       isActive: false,
       homeActive: false,
+      mapActive: false,
       vueActive: true,
       message: 'Hello Vue!',
       message2: stuff,

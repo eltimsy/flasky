@@ -57,7 +57,7 @@ def close_db(error):
 
 @app.route('/')
 def home():
-    return render_template('layout.html', map=False)
+    return render_template('layout.html', googlekey=GOOGLE_MAPS_KEY)
 
 
 @app.route('/map')

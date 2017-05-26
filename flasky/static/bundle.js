@@ -10467,11 +10467,11 @@ function googlemap() {
     },
     methods: {
       showmap: function() {
+        this.$parent.mapActive = true;
         $.ajax({
           url: 'http://127.0.0.1:5000/map'
         }).done(data => {
           var abc = JSON.parse(data)
-          console.log(abc.map)
           this.map = (abc.map);
         })
       }
@@ -10575,6 +10575,7 @@ window.onload = function () {
     data: {
       isActive: false,
       homeActive: false,
+      mapActive: false,
       vueActive: true,
       message: 'Hello Vue!',
       message2: stuff,

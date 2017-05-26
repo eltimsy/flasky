@@ -28,3 +28,6 @@ h2              { font-size: 1.2em; }
     height: 400px;
     width: 100%;
 }
+[v-cloak] {
+  display: none;
+}
