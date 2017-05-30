@@ -1,5 +1,6 @@
 import os
 import sqlite3
+import requests
 from flask import Flask, request, session, g, redirect, url_for, abort, \
      render_template, flash, json
 from .secrets import (
@@ -62,9 +63,16 @@ def home():
 
 @app.route('/map', methods=['GET'])
 def map():
+    address = request.values['address']
+    address.replace(" ", "+")
     city = request.values['city']
     country = request.values['country']
-    url = 'https://maps.googleapis.com/maps/api/staticmap?center=' + city + ',' + country + '&zoom=13&size=600x300&maptype=roadmap&key=' + GOOGLE_MAPS_KEY
+    geoaddress = address + ',' + city + ',' + country
+    geolocation = requests.get('https://maps.googleapis.com/maps/api/geocode/json?address=' + geoaddress + '&key=' + GOOGLE_MAPS_KEY)
+    lat = geolocation.json()['results'][0]['geometry']['location']['lat']
+    lng = geolocation.json()['results'][0]['geometry']['location']['lng']
+    markers = 'markers=' + str(lat) + ',' + str(lng)
+    url = 'https://maps.googleapis.com/maps/api/staticmap?center=' + geoaddress + '&zoom=13&size=600x300&maptype=roadmap&' +  markers + '&key=' + GOOGLE_MAPS_KEY
     result = json.dumps({'map': url})
     return result
 

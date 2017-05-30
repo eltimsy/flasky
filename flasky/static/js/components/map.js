@@ -3,6 +3,8 @@ export default function googlemap() {
     template:`
       <div id="Gmap">
         <form method=get v-on:submit.prevent="showmap">
+          <h3>Address: </h3>
+          <input type=text size=30 name=title v-model="address">
           <h3>City:</h3>
           <input type=text size=30 name=title v-model="city">
           <h3>Country:</h3>
@@ -13,6 +15,7 @@ export default function googlemap() {
       </div>`,
     data: function (){
       return {
+        address: '',
         city: '',
         country: '',
         map: null,
@@ -24,7 +27,7 @@ export default function googlemap() {
         $.ajax({
           url: 'http://127.0.0.1:5000/map',
           type: 'GET',
-          data: {city: this.city, country: this.country},
+          data: {address: this.address, city: this.city, country: this.country},
         }).done(data => {
           var parsing = JSON.parse(data)
           this.map = (parsing.map);
