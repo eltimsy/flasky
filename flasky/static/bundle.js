@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 5);
+/******/ 	return __webpack_require__(__webpack_require__.s = 6);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -10374,6 +10374,45 @@ function addEntry() {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+/* WEBPACK VAR INJECTION */(function($) {/* harmony export (immutable) */ __webpack_exports__["a"] = getbeer;
+function getbeer() {
+  return Vue.component('beerfun',{
+    template:`
+      <div>
+        <form method=get v-on:submit.prevent="beernow">
+          <br><br>
+          <input type="submit" class="btn btn-danger" value="Get BEER">
+        </form>
+        <div v-if="beer">
+          {{ beer[0].id }}
+        </div>
+      </div>`,
+    data: function (){
+      return {
+        beer: '',
+      }
+    },
+    methods: {
+      beernow: function() {
+        $.ajax({
+          url: 'http://127.0.0.1:5000/beer',
+          type: 'GET',
+          data: {},
+        }).done(data => {
+          var parsing = JSON.parse(data)
+          this.beer = (parsing.data);
+        })
+      }
+    }
+  })
+}
+/* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(0)))
+
+/***/ }),
+/* 3 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
 /* harmony export (immutable) */ __webpack_exports__["a"] = homepage;
 const $ = __webpack_require__ (0);
 
@@ -10448,7 +10487,7 @@ function homepage() {
 }
 
 /***/ }),
-/* 3 */
+/* 4 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -10463,7 +10502,10 @@ function googlemap() {
           <h3>City:</h3>
           <input type=text size=30 name=title v-model="city">
           <h3>Country:</h3>
-          <input type=text size=30 name=title v-model="country"><br><br>
+          <input type=text size=30 name=title v-model="country">
+          <h4>Zoom:</h4>
+          <input type=text size=15 name=title v-model="zoom">
+          <br><br>
           <input type="submit" class="btn btn-danger" value="Show Map">
         </form>
         <img :src="map" />
@@ -10473,6 +10515,7 @@ function googlemap() {
         address: '',
         city: '',
         country: '',
+        zoom: '',
         map: null,
       }
     },
@@ -10482,7 +10525,7 @@ function googlemap() {
         $.ajax({
           url: 'http://127.0.0.1:5000/map',
           type: 'GET',
-          data: {address: this.address, city: this.city, country: this.country},
+          data: {address: this.address, city: this.city, country: this.country, zoom: this.zoom},
         }).done(data => {
           var parsing = JSON.parse(data)
           this.map = (parsing.map);
@@ -10494,7 +10537,7 @@ function googlemap() {
 /* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(0)))
 
 /***/ }),
-/* 4 */
+/* 5 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -10540,15 +10583,17 @@ function vueFun() {
 }
 
 /***/ }),
-/* 5 */
+/* 6 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_home__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_vue_fun__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_home__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_vue_fun__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_addentry__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_map__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_map__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_beer__ = __webpack_require__(2);
+
 
 
 
@@ -10561,12 +10606,14 @@ const home = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__components_home_
 const vuefun = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__components_vue_fun__["a" /* default */])();
 const addentry = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2__components_addentry__["a" /* default */])();
 const map = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_3__components_map__["a" /* default */])();
+const beer = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_4__components_beer__["a" /* default */])();
 
 const routes = [
   { path: '/', component: home },
   { path: '/vuefun', component: vuefun },
   { path: '/addentry', component: addentry },
-  { path: '/mapfun', component: map}
+  { path: '/mapfun', component: map},
+  { path: '/beer', component: beer}
 ]
 
 window.onload = function () {

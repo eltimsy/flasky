@@ -7,11 +7,11 @@ from .secrets import (
     USER,
     PASS,
     GOOGLE_MAPS_KEY,
+    BREWERYDB_KEY,
 )
 
 app = Flask(__name__) # create the application instance :)
 app.config.from_object(__name__) # load config from this file , flaskr.py
-
 # Load default config and override config from an environment variable
 app.config.update(dict(
     DATABASE=os.path.join(app.root_path, 'flasky.db'),
@@ -72,8 +72,16 @@ def map():
     lat = geolocation.json()['results'][0]['geometry']['location']['lat']
     lng = geolocation.json()['results'][0]['geometry']['location']['lng']
     markers = 'markers=' + str(lat) + ',' + str(lng)
-    url = 'https://maps.googleapis.com/maps/api/staticmap?center=' + geoaddress + '&zoom=13&size=600x300&maptype=roadmap&' +  markers + '&key=' + GOOGLE_MAPS_KEY
+    zoom = '&zoom=' + request.values['zoom']
+    url = 'https://maps.googleapis.com/maps/api/staticmap?center=' + geoaddress + zoom + '&size=600x400&maptype=roadmap&' +  markers + '&key=' + GOOGLE_MAPS_KEY
     result = json.dumps({'map': url})
+    return result
+
+@app.route('/beer', methods=['GET'])
+def beer():
+    payload = {'key': BREWERYDB_KEY, 'name': "stella"}
+    r = requests.get('http://api.brewerydb.com/v2/beers', params=payload)
+    result = r.text
     return result
 
 @app.route('/showentries', methods=['GET'])

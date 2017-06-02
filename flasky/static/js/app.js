@@ -2,6 +2,7 @@ import homepage from './components/home';
 import vueFun from './components/vue_fun';
 import addEntry from './components/addentry';
 import googlemap from './components/map';
+import getbeer from './components/beer';
 
 function stuff(number) {
   return number * 10
@@ -10,12 +11,14 @@ const home = homepage();
 const vuefun = vueFun();
 const addentry = addEntry();
 const map = googlemap();
+const beer = getbeer();
 
 const routes = [
   { path: '/', component: home },
   { path: '/vuefun', component: vuefun },
   { path: '/addentry', component: addentry },
-  { path: '/mapfun', component: map}
+  { path: '/mapfun', component: map},
+  { path: '/beer', component: beer}
 ]
 
 window.onload = function () {
