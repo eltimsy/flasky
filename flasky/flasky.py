@@ -79,7 +79,7 @@ def map():
 
 @app.route('/beer', methods=['GET'])
 def beer():
-    payload = {'key': BREWERYDB_KEY, 'name': "stella"}
+    payload = {'key': BREWERYDB_KEY, 'name': request.values['beer']}
     r = requests.get('http://api.brewerydb.com/v2/beers', params=payload)
     result = r.text
     return result
