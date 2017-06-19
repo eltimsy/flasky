@@ -10393,6 +10393,9 @@ function getbeer() {
             </li>
           </ul>
         </div>
+        <form method=post v-on:submit.prevent="addbeer">
+          <input type=submit value=Add>
+        </form>
       </div>`,
     data: function (){
       return {
@@ -10410,6 +10413,13 @@ function getbeer() {
           var parsing = JSON.parse(data)
           console.log(parsing.data)
           this.beer = (parsing.data);
+        })
+      },
+      addbeer: function() {
+        $.post('http://127.0.0.1:5000/addbeer',{
+          'name': this.beername, 'url': this.beer[0].labels.icon
+        }).done(data => {
+          console.log('done')
         })
       }
     }

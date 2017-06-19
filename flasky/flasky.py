@@ -84,6 +84,15 @@ def beer():
     result = r.text
     return result
 
+@app.route('/addbeer', methods=['POST'])
+def add_beer():
+    db = get_db()
+    db.execute('insert into beer (name, url) values (?, ?)',
+                 [request.form['name'], request.form['url']])
+    db.commit()
+    flash('Beer was inserted into db')
+    return redirect(url_for('show_entries'))
+
 @app.route('/showentries', methods=['GET'])
 def show_entries():
     db = get_db()
