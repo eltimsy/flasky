@@ -10386,16 +10386,16 @@ function getbeer() {
           <input type="submit" class="btn btn-danger" value="Get BEER">
         </form>
         <div v-if="beer">
-          <ul>
-            <li v-for="item in beer">
-              <img :src="item.labels.icon" />
-              {{ item.description }}
-            </li>
-          </ul>
+          <div v-for="item in beer">
+            <img :src="item.labels.icon" /> <strong>{{ beername }}</strong>
+            <br>
+            {{ item.description }}
+          </div>
+          <hr>
+          <form method=post v-on:submit.prevent="addbeer">
+            <input class="btn btn-primary" type=submit value=Add>
+          </form>
         </div>
-        <form method=post v-on:submit.prevent="addbeer">
-          <input type=submit value=Add>
-        </form>
       </div>`,
     data: function (){
       return {
