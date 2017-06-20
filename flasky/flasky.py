@@ -97,8 +97,10 @@ def add_beer():
 def show_entries():
     db = get_db()
     cur = db.execute('select title, text from entries order by id desc')
+    beer = db.execute('select name, url from beer order by id desc')
     entries = cur.fetchall()
-    result = json.dumps([toJSON(item) for item in entries])
+    beers = beer.fetchall()
+    result = json.dumps([[toJSON(item) for item in entries], [toBEER(item) for item in beers]])
     return result
     # return render_template('show_entries.html', entries=entries)
 
@@ -106,6 +108,8 @@ def show_entries():
 def toJSON(item):
     return {'title': item['title'], 'text': item['text']}
 
+def toBEER(item):
+    return {'name': item['name'], 'url': item['url']}
 
 @app.route('/vuefun')
 def vue_page():

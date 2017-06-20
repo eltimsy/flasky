@@ -24,10 +24,23 @@ export default function homepage() {
             </form>
           </div>
         </div>
+        <h2>All your beers!</h2>
+        <div v-for="item of beers"
+            :key="item.name"
+            class="panel panel-info"
+        >
+          <div class="panel-heading">
+            <h3 class="panel-title">{{ item.name }}</h3>
+          </div>
+          <div class="panel-body">
+            <img :src="item.url" />
+          </div>
+        </div>
       </div>`,
     data: function(){
       return {
         entries: null,
+        beers: null,
         isActive: false,
         text: '',
       }
@@ -37,7 +50,9 @@ export default function homepage() {
         $.ajax({
           url: 'http://127.0.0.1:5000/showentries'
         }).done(data => {
-          this.entries = JSON.parse(data);
+          const information = JSON.parse(data);
+          this.entries = information[0];
+          this.beers = information[1];
         })
       },
       deletepost: function(text) {
