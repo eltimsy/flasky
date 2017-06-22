@@ -1,16 +1,13 @@
 body            { font-family: sans-serif; background: #eee; }
 a, h1, h2       { color: #377ba8; }
 h1, h2          { font-family: 'Georgia', serif; margin: 0; }
-h1              { border-bottom: 2px solid #eee; }
+h1              { border-bottom: 2px solid #9DB5B2; }
 h2              { font-size: 1.2em; }
 
 .form-signin {
     max-width: 500px;
     padding: 15px;
     margin: auto;
-}
-.router-link-active {
-  color: red;
 }
 .page           { margin: 2em auto; width: 35em; border: 5px solid #ccc;
                   padding: 0.8em; background: white; }
@@ -28,8 +25,14 @@ h2              { font-size: 1.2em; }
   display: inline-block;
   vertical-align: top;
 }
+.container-fluid .jumbotron {
+  background-color: #7F6A93;
+}
 .circle {
   display: inline-block;
+}
+.container-fluid{
+  background-color: #F7FFF6;
 }
 #Gmap {
     height: 400px;
