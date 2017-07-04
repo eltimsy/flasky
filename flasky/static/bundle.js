@@ -10359,7 +10359,7 @@ function addEntry() {
     methods: {
       addsomething: function() {
         this.success = false
-        $.post('http://127.0.0.1:5000/add',{
+        $.post('http://flasky:5000/add',{
           'title': this.title, 'text': this.text
         }).done(data => {
           this.success = true
@@ -10406,7 +10406,7 @@ function getbeer() {
     methods: {
       beernow: function() {
         $.ajax({
-          url: 'http://127.0.0.1:5000/beer',
+          url: 'http://flasky:5000/beer',
           type: 'GET',
           data: {beer: this.beername},
         }).done(data => {
@@ -10416,7 +10416,7 @@ function getbeer() {
         })
       },
       addbeer: function() {
-        $.post('http://127.0.0.1:5000/addbeer',{
+        $.post('http://flasky:5000/addbeer',{
           'name': this.beername, 'url': this.beer[0].labels.icon, 'description': this.beer[0].description
         }).done(data => {
           console.log('done')
@@ -10492,7 +10492,7 @@ function homepage() {
     methods: {
       fetchData: function() {
         $.ajax({
-          url: 'http://127.0.0.1:5000/showentries'
+          url: 'http://flasky:5000/showentries'
         }).done(data => {
           const information = JSON.parse(data);
           this.entries = information[0];
@@ -10501,7 +10501,7 @@ function homepage() {
       },
       deletepost: function(text) {
         $.ajax({
-          url:'http://127.0.0.1:5000/delete',
+          url:'http://flasky:5000/delete',
           type: 'DELETE',
           data: {entry: text},
           success: function(data) {
@@ -10514,7 +10514,7 @@ function homepage() {
       },
       editsomething: function(text) {
         $.ajax({
-          url:'http://127.0.0.1:5000/edit',
+          url:'http://flasky:5000/edit',
           type: 'PUT',
           data: {entry: text, change: this.text},
           success: function(data) {

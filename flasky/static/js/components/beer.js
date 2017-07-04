@@ -29,7 +29,7 @@ export default function getbeer() {
     methods: {
       beernow: function() {
         $.ajax({
-          url: 'http://127.0.0.1:5000/beer',
+          url: 'http://flasky:5000/beer',
           type: 'GET',
           data: {beer: this.beername},
         }).done(data => {
@@ -39,7 +39,7 @@ export default function getbeer() {
         })
       },
       addbeer: function() {
-        $.post('http://127.0.0.1:5000/addbeer',{
+        $.post('http://flasky:5000/addbeer',{
           'name': this.beername, 'url': this.beer[0].labels.icon, 'description': this.beer[0].description
         }).done(data => {
           console.log('done')

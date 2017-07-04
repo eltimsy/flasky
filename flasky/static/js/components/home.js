@@ -57,7 +57,7 @@ export default function homepage() {
     methods: {
       fetchData: function() {
         $.ajax({
-          url: 'http://127.0.0.1:5000/showentries'
+          url: 'http://flasky:5000/showentries'
         }).done(data => {
           const information = JSON.parse(data);
           this.entries = information[0];
@@ -66,7 +66,7 @@ export default function homepage() {
       },
       deletepost: function(text) {
         $.ajax({
-          url:'http://127.0.0.1:5000/delete',
+          url:'http://flasky:5000/delete',
           type: 'DELETE',
           data: {entry: text},
           success: function(data) {
@@ -79,7 +79,7 @@ export default function homepage() {
       },
       editsomething: function(text) {
         $.ajax({
-          url:'http://127.0.0.1:5000/edit',
+          url:'http://flasky:5000/edit',
           type: 'PUT',
           data: {entry: text, change: this.text},
           success: function(data) {

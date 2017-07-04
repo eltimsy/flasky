@@ -25,7 +25,7 @@ export default function addEntry() {
     methods: {
       addsomething: function() {
         this.success = false
-        $.post('http://127.0.0.1:5000/add',{
+        $.post('http://flasky:5000/add',{
           'title': this.title, 'text': this.text
         }).done(data => {
           this.success = true
