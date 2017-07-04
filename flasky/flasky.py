@@ -87,8 +87,8 @@ def beer():
 @app.route('/addbeer', methods=['POST'])
 def add_beer():
     db = get_db()
-    db.execute('insert into beer (name, url) values (?, ?)',
-                 [request.form['name'], request.form['url']])
+    db.execute('insert into beer (name, url, description) values (?, ?, ?)',
+                 [request.form['name'], request.form['url'], request.form['description']])
     db.commit()
     flash('Beer was inserted into db')
     return redirect(url_for('show_entries'))
@@ -97,7 +97,7 @@ def add_beer():
 def show_entries():
     db = get_db()
     cur = db.execute('select title, text from entries order by id desc')
-    beer = db.execute('select name, url from beer order by id desc')
+    beer = db.execute('select * from beer order by id asc')
     entries = cur.fetchall()
     beers = beer.fetchall()
     result = json.dumps([[toJSON(item) for item in entries], [toBEER(item) for item in beers]])
@@ -109,7 +109,7 @@ def toJSON(item):
     return {'title': item['title'], 'text': item['text']}
 
 def toBEER(item):
-    return {'name': item['name'], 'url': item['url']}
+    return {'id': item['id'], 'name': item['name'], 'url': item['url'], 'description': item['description']}
 
 @app.route('/vuefun')
 def vue_page():

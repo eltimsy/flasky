@@ -25,17 +25,26 @@ export default function homepage() {
           </div>
         </div>
         <h2>All your beers!</h2>
-        <div v-for="item of beers"
-            :key="item.name"
-            class="panel panel-info"
-        >
-          <div class="panel-heading">
-            <h3 class="panel-title">{{ item.name }}</h3>
-          </div>
-          <div class="panel-body">
-            <img :src="item.url" />
-          </div>
-        </div>
+        <table class="table">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Beer Name</th>
+              <th>Label</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="item of beers"
+                :key="item.name"
+            >
+              <th scope="row">{{ item.id }}</th>
+              <td>{{ item.name }}</td>
+              <td><img :src="item.url" /></td>
+              <td>{{ item.description }}</td>
+            </tr>
+          </tbody>
+        </table>
       </div>`,
     data: function(){
       return {

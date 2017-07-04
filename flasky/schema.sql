@@ -7,5 +7,6 @@ create table entries (
 create table beer (
   id integer primary key autoincrement,
   name text not null,
-  url text not null
+  url text not null,
+  description text,
 )

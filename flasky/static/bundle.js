@@ -10417,7 +10417,7 @@ function getbeer() {
       },
       addbeer: function() {
         $.post('http://127.0.0.1:5000/addbeer',{
-          'name': this.beername, 'url': this.beer[0].labels.icon
+          'name': this.beername, 'url': this.beer[0].labels.icon, 'description': this.beer[0].description
         }).done(data => {
           console.log('done')
         })
@@ -10460,17 +10460,26 @@ function homepage() {
           </div>
         </div>
         <h2>All your beers!</h2>
-        <div v-for="item of beers"
-            :key="item.name"
-            class="panel panel-info"
-        >
-          <div class="panel-heading">
-            <h3 class="panel-title">{{ item.name }}</h3>
-          </div>
-          <div class="panel-body">
-            <img :src="item.url" />
-          </div>
-        </div>
+        <table class="table">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Beer Name</th>
+              <th>Label</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="item of beers"
+                :key="item.name"
+            >
+              <th scope="row">{{ item.id }}</th>
+              <td>{{ item.name }}</td>
+              <td><img :src="item.url" /></td>
+              <td>{{ item.description }}</td>
+            </tr>
+          </tbody>
+        </table>
       </div>`,
     data: function(){
       return {
