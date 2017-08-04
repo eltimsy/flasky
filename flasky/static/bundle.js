@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 6);
+/******/ 	return __webpack_require__(__webpack_require__.s = 7);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -10584,6 +10584,47 @@ function googlemap() {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+/* WEBPACK VAR INJECTION */(function($) {/* harmony export (immutable) */ __webpack_exports__["a"] = getmatch;
+function getmatch() {
+  return Vue.component('matchfun',{
+    template:`
+      <div>
+        <form method=get v-on:submit.prevent="matchnow">
+          <h3>Write down name of people: </h3>
+          <input type=text size=30 name=title v-model="man">
+          <br><br>
+          <input type=text size=30 name=title v-model="woman">
+          <br><br>
+          <input type="submit" class="btn btn-danger" value="Get Match">
+        </form>
+      </div>`,
+    data: function (){
+      return {
+        man: '',
+        woman: '',
+      }
+    },
+    methods: {
+      matchnow: function() {
+        $.ajax({
+          url: 'http://flasky:5000/match',
+          type: 'GET',
+          data: {man: this.man, woman: this.woman},
+        }).done(data => {
+          var parsing = JSON.parse(data)
+          console.log(parsing.data)
+        })
+      }
+    }
+  })
+}
+/* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(0)))
+
+/***/ }),
+/* 6 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
 /* harmony export (immutable) */ __webpack_exports__["a"] = vueFun;
 function vueFun() {
   return Vue.component('vuefun',{
@@ -10626,16 +10667,18 @@ function vueFun() {
 }
 
 /***/ }),
-/* 6 */
+/* 7 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_home__ = __webpack_require__(3);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_vue_fun__ = __webpack_require__(5);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_addentry__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_map__ = __webpack_require__(4);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_beer__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_vue_fun__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_match_maker__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_addentry__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_map__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__components_beer__ = __webpack_require__(2);
+
 
 
 
@@ -10647,16 +10690,18 @@ function stuff(number) {
 }
 const home = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__components_home__["a" /* default */])();
 const vuefun = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__components_vue_fun__["a" /* default */])();
-const addentry = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2__components_addentry__["a" /* default */])();
-const map = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_3__components_map__["a" /* default */])();
-const beer = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_4__components_beer__["a" /* default */])();
+const addentry = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_3__components_addentry__["a" /* default */])();
+const map = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_4__components_map__["a" /* default */])();
+const beer = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_5__components_beer__["a" /* default */])();
+const matchMaker = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2__components_match_maker__["a" /* default */])();
 
 const routes = [
   { path: '/', component: home },
   { path: '/vuefun', component: vuefun },
   { path: '/addentry', component: addentry },
   { path: '/mapfun', component: map},
-  { path: '/beer', component: beer}
+  { path: '/beer', component: beer},
+  { path: '/matchmaker', component: matchMaker}
 ]
 
 window.onload = function () {

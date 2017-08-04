@@ -1,5 +1,6 @@
 import homepage from './components/home';
 import vueFun from './components/vue_fun';
+import getmatch from './components/match_maker';
 import addEntry from './components/addentry';
 import googlemap from './components/map';
 import getbeer from './components/beer';
@@ -12,13 +13,15 @@ const vuefun = vueFun();
 const addentry = addEntry();
 const map = googlemap();
 const beer = getbeer();
+const matchMaker = getmatch();
 
 const routes = [
   { path: '/', component: home },
   { path: '/vuefun', component: vuefun },
   { path: '/addentry', component: addentry },
   { path: '/mapfun', component: map},
-  { path: '/beer', component: beer}
+  { path: '/beer', component: beer},
+  { path: '/matchmaker', component: matchMaker}
 ]
 
 window.onload = function () {
