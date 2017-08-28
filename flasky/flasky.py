@@ -1,3 +1,5 @@
+from __future__ import print_function
+import sys
 import os
 import sqlite3
 import requests
@@ -7,6 +9,7 @@ from .secrets import (
     USER,
     PASS,
     GOOGLE_MAPS_KEY,
+    GOOGLE_PLACES_KEY,
     BREWERYDB_KEY,
 )
 
@@ -76,6 +79,14 @@ def map():
     zoom = '&zoom=' + request.values['zoom']
     url = 'https://maps.googleapis.com/maps/api/staticmap?center=' + geoaddress + zoom + '&size=600x400&maptype=roadmap&' +  markers + '&key=' + GOOGLE_MAPS_KEY
     result = json.dumps({'map': url})
+    return result
+
+@app.route('/places', methods=['GET'])
+def getplaces():
+    payload = {'key': GOOGLE_PLACES_KEY, 'location': '43.6476865,-79.3933145', 'radius': '5000', 'type': 'doctor'}
+    places = requests.get('https://maps.googleapis.com/maps/api/place/nearbysearch/json', params=payload)
+    data = places.json()
+    result = json.dumps({'info': data})
     return result
 
 @app.route('/beer', methods=['GET'])

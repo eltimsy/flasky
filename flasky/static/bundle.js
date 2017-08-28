@@ -10552,6 +10552,9 @@ function googlemap() {
           <input type="submit" class="btn btn-danger" value="Show Map">
         </form>
         <img :src="map" />
+        <form method=get v-on:submit.prevent="getplaces">
+          <input type="submit" class="btn btn-success" value="Places">
+        </form>
       </div>`,
     data: function (){
       return {
@@ -10566,12 +10569,23 @@ function googlemap() {
       showmap: function() {
         this.$parent.mapActive = true;
         $.ajax({
-          url: 'http://127.0.0.1:5000/map',
+          url: 'http://flasky:5000/map',
           type: 'GET',
           data: {address: this.address, city: this.city, country: this.country, zoom: this.zoom},
         }).done(data => {
           var parsing = JSON.parse(data)
           this.map = (parsing.map);
+        })
+      },
+      getplaces: function() {
+        $.ajax({
+          url: 'http://flasky:5000/places',
+          type: 'GET',
+          data: {},
+        }).done(data => {
+          var parsing = JSON.parse(data)
+          console.log('laksdfjlaskdfjaldkf')
+          console.log(parsing);
         })
       }
     }
