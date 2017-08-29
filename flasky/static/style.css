@@ -31,6 +31,9 @@ h2              { font-size: 1.2em; }
 .circle {
   display: inline-block;
 }
+.places{
+  display: inline-block;
+}
 .container-fluid{
   background-color: #F7FFF6;
 }

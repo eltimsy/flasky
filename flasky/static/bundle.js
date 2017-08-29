@@ -10538,7 +10538,7 @@ function homepage() {
 function googlemap() {
   return Vue.component('mapfun',{
     template:`
-      <div id="Gmap">
+      <div>
         <form method=get v-on:submit.prevent="showmap">
           <h3>Address: </h3>
           <input type=text size=30 name=title v-model="address">
@@ -10552,19 +10552,23 @@ function googlemap() {
           <input type="submit" class="btn btn-danger" value="Show Map">
         </form>
         <img :src="map" />
+        <p>{{ this.name }}</p>
         <form method=get v-on:submit.prevent="getplaces">
+          <h3>Radius: </h3>
+          <input type=text size=30 name=title v-model="radius">
           <input type="submit" class="btn btn-success" value="Places">
         </form>
-        <div>{{ this.name }}</div>
+        <p>wtf</p>
       </div>`,
     data: function (){
       return {
         address: '',
         city: '',
         country: '',
+        radius: '',
         zoom: '',
         map: null,
-        name: null,
+        name: 'Empty',
       }
     },
     methods: {
