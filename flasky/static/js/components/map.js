@@ -18,6 +18,7 @@ export default function googlemap() {
         <form method=get v-on:submit.prevent="getplaces">
           <input type="submit" class="btn btn-success" value="Places">
         </form>
+        <div>{{ this.name }}</div>
       </div>`,
     data: function (){
       return {
@@ -26,6 +27,7 @@ export default function googlemap() {
         country: '',
         zoom: '',
         map: null,
+        name: null,
       }
     },
     methods: {
@@ -44,9 +46,10 @@ export default function googlemap() {
         $.ajax({
           url: 'http://flasky:5000/places',
           type: 'GET',
-          data: {},
+          data: {address: this.address, city: this.city, country: this.country},
         }).done(data => {
           var parsing = JSON.parse(data)
+          this.name = (parsing.info.results[0].name)
           console.log(parsing);
         })
       }
