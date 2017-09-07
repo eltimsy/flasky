@@ -15,13 +15,15 @@ export default function googlemap() {
           <input type="submit" class="btn btn-danger" value="Show Map">
         </form>
         <img :src="map" />
-        <p>{{ this.name }}</p>
+        <div v-if="this.firstplace">
+          <p>{{this.firstplace.name}}</p>
+          <p>{{this.firstplace.rating}}</p>
+        </div>
         <form method=get v-on:submit.prevent="getplaces">
           <h3>Radius: </h3>
           <input type=text size=30 name=title v-model="radius">
           <input type="submit" class="btn btn-success" value="Places">
         </form>
-        <p>wtf</p>
       </div>`,
     data: function (){
       return {
@@ -31,7 +33,7 @@ export default function googlemap() {
         radius: '',
         zoom: '',
         map: null,
-        name: 'Empty',
+        firstplace: null,
       }
     },
     methods: {
@@ -50,10 +52,10 @@ export default function googlemap() {
         $.ajax({
           url: 'http://flasky:5000/places',
           type: 'GET',
-          data: {address: this.address, city: this.city, country: this.country},
+          data: {address: this.address, city: this.city, country: this.country, radius: this.radius},
         }).done(data => {
           var parsing = JSON.parse(data)
-          this.name = (parsing.info.results[0].name)
+          this.firstplace = (parsing.info.results[0])
           console.log(parsing);
         })
       }

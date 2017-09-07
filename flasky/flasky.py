@@ -88,11 +88,12 @@ def getplaces():
     city = request.values['city']
     country = request.values['country']
     geoaddress = address + ',' + city + ',' + country
+    radius = request.values['radius']
     geolocation = requests.get('https://maps.googleapis.com/maps/api/geocode/json?address=' + geoaddress + '&key=' + GOOGLE_MAPS_KEY)
     lat = geolocation.json()['results'][0]['geometry']['location']['lat']
     lng = geolocation.json()['results'][0]['geometry']['location']['lng']
     location = str(lat) + ',' + str(lng)
-    payload = {'key': GOOGLE_PLACES_KEY, 'location': location, 'radius': '5000', 'type': 'doctor'}
+    payload = {'key': GOOGLE_PLACES_KEY, 'location': location, 'radius': radius, 'type': 'doctor'}
     places = requests.get('https://maps.googleapis.com/maps/api/place/nearbysearch/json', params=payload)
     data = places.json()
     result = json.dumps({'info': data})
