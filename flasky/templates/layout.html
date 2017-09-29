@@ -54,14 +54,27 @@
 
     <div id="app">
 
-    <ul id="navbar" class="nav nav-tabs">
-      <li role='presentation'><router-link to="/" exact>Home</router-link></li>
-      <li role='presentation'><router-link to="/vuefun">Vue Fun</router-link></li>
-      <li role='presentation'><router-link to="/addentry">Add Entry</router-link></li>
-      <li role='presentation'><router-link to="/mapfun">Map</router-link></li>
-      <li role='presentation'><router-link to="/beer">Beer</router-link></li>
-      <li role='presentation'><router-link to="/matchmaker">Match Maker</router-link></li>
-    </ul>
+      <ul id="navbar" class="nav nav-tabs">
+        <li role='presentation'><router-link to="/" exact>Home</router-link></li>
+        <li role='presentation'><router-link to="/vuefun">Vue Fun</router-link></li>
+        <li role='presentation'><router-link to="/addentry">Add Entry</router-link></li>
+        <li role='presentation'><router-link to="/mapfun">Map</router-link></li>
+        <li role='presentation'><router-link to="/beer">Beer</router-link></li>
+        <li role='presentation'><router-link to="/matchmaker">Match Maker</router-link></li>
+      </ul>
+      <form id="signin" class="navbar-form navbar-right" role="form">
+        <div class="input-group">
+          <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+          <input id="user" type="user" class="form-control" name="user" value="" placeholder="User">
+        </div>
+
+        <div class="input-group">
+          <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+          <input id="password" type="password" class="form-control" name="password" value="" placeholder="Password">
+        </div>
+
+        <button type="submit" class="btn btn-primary">Login</button>
+      </form>
 
       <router-view></router-view>
       <!-- <div v-show="mapActive" id="Gmap"></div> -->
