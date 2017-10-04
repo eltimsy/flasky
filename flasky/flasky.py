@@ -54,6 +54,14 @@ def get_db():
         g.sqlite_db = connect_db()
     return g.sqlite_db
 
+
+def dict_factory(cursor, row):
+    d = {}
+    for idx, col in enumerate(cursor.description):
+        d[col[0]] = row[idx]
+    return d
+
+
 @app.teardown_appcontext
 def close_db(error):
     """Closes the database again at the end of the request."""
@@ -168,14 +176,17 @@ def edit_entry():
 def login():
     error = None
     if request.method == 'POST':
-        if request.form['username'] != app.config['USERNAME']:
+        db = get_db()
+        db.row_factory = dict_factory
+        account_user = db.execute('select * from user where name=(?)', [request.form['user']]).fetchone()
+        if not account_user:
             error = 'Invalid username'
-        elif request.form['password'] != app.config['PASSWORD']:
+        elif request.form['password'] != account_user['password']:
             error = 'Invalid password'
         else:
             session['logged_in'] = True
             flash('You were logged in')
-            return redirect(url_for('show_entries'))
+            return render_template('layout.html', googlekey=GOOGLE_MAPS_KEY)
     return render_template('login.html', error=error)
 
 @app.route('/logout')

@@ -62,19 +62,22 @@
         <li role='presentation'><router-link to="/beer">Beer</router-link></li>
         <li role='presentation'><router-link to="/matchmaker">Match Maker</router-link></li>
       </ul>
-      <form id="signin" class="navbar-form navbar-right" role="form">
-        <div class="input-group">
-          <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-          <input id="user" type="user" class="form-control" name="user" value="" placeholder="User">
-        </div>
+      {% if not session.logged_in %}
+        {% if error %}<p class=error><strong>Error:</strong> {{ error }}{% endif %}
+        <form id="signin" class="navbar-form navbar-right" action="{{ url_for('login') }}" method=post>
+          <div class="input-group">
+            <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+            <input id="user" type="user" class="form-control" name="user" value="" placeholder="User">
+          </div>
 
-        <div class="input-group">
-          <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-          <input id="password" type="password" class="form-control" name="password" value="" placeholder="Password">
-        </div>
+          <div class="input-group">
+            <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+            <input id="password" type="password" class="form-control" name="password" value="" placeholder="Password">
+          </div>
 
-        <button type="submit" class="btn btn-primary">Login</button>
-      </form>
+          <button type="submit" class="btn btn-primary">Login</button>
+        </form>
+      {% endif %}
 
       <router-view></router-view>
       <!-- <div v-show="mapActive" id="Gmap"></div> -->
