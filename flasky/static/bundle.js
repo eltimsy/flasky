@@ -10744,6 +10744,8 @@ window.onload = function () {
     el: '#app',
     data: {
       isActive: false,
+      login: true,
+      register: false,
       homeActive: false,
       mapActive: false,
       vueActive: true,
@@ -10778,6 +10780,14 @@ window.onload = function () {
       },
       activateItem: function(item) {
         this.isActive = item;
+      },
+      switchLogin: function() {
+        this.register = false;
+        this.login = true;
+      },
+      switchRegister: function() {
+        this.register = true;
+        this.login = false;
       },
     }
   });
