@@ -189,6 +189,14 @@ def login():
             return render_template('layout.html', googlekey=GOOGLE_MAPS_KEY)
     return render_template('login.html', error=error)
 
+@app.route('/register', methods=['POST'])
+def register():
+    db = get_db()
+    db.execute('insert into user (name, password, email) values (?, ?, ?)',
+                 [request.form['user'], request.form['password'], request.form['email']])
+    db.commit()
+    return render_template('login.html')
+
 @app.route('/logout')
 def logout():
     session.pop('logged_in', None)
