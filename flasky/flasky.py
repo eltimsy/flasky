@@ -11,6 +11,7 @@ from .secrets import (
     GOOGLE_MAPS_KEY,
     GOOGLE_PLACES_KEY,
     BREWERYDB_KEY,
+    APP_SECRET,
 )
 
 app = Flask(__name__) # create the application instance :)
@@ -185,8 +186,10 @@ def login():
             error = 'Invalid password'
         else:
             session['logged_in'] = True
+            session['username'] = request.form['user']
+            session.modified = True
             flash('You were logged in')
-            return render_template('layout.html', googlekey=GOOGLE_MAPS_KEY)
+            return redirect(url_for('home'))
     return render_template('login.html', error=error)
 
 @app.route('/register', methods=['POST'])
@@ -202,3 +205,5 @@ def logout():
     session.pop('logged_in', None)
     flash('You were logged out')
     return redirect(url_for('show_entries'))
+
+app.secret_key = APP_SECRET
